@@ -131,7 +131,9 @@ public class PolygonTool extends SelectionTool implements PolygonTransformationL
         follower.setSelectedAnchor(vertexIndex);
         lastSelectedMeshFollower = follower;
 
-        polygonBackup = polygonComponent.vertices.clone();
+        if (polygonComponent.vertices != null) {
+            polygonBackup = polygonComponent.vertices.clone();
+        }
     }
 
     @Override
