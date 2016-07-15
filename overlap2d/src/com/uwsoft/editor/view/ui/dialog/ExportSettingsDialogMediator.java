@@ -61,6 +61,7 @@ public class ExportSettingsDialogMediator extends SimpleMediator<ExportSettingsD
         UIStage uiStage = sandbox.getUIStage();
         switch (notification.getName()) {
             case Overlap2DMenuBar.EXPORT_SETTINGS:
+                viewComponent.setExportPath();
                 viewComponent.show(uiStage);
                 break;
             case ExportSettingsDialog.SAVE_SETTINGS_AND_EXPORT_BTN_CLICKED:

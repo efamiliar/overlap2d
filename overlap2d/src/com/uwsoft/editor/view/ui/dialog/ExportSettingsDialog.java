@@ -26,6 +26,7 @@ import com.kotcrab.vis.ui.widget.*;
 import com.kotcrab.vis.ui.widget.file.FileChooser;
 import com.commons.O2DDialog;
 import com.uwsoft.editor.Overlap2DFacade;
+import com.uwsoft.editor.proxy.ProjectManager;
 import com.uwsoft.editor.view.ui.widget.InputFileWidget;
 
 /**
@@ -65,6 +66,12 @@ public class ExportSettingsDialog extends O2DDialog {
         buttonsTable.add(saveSettingsAndExportBtn).height(24).width(170);
         mainTable.add(buttonsTable).colspan(2);
         add(mainTable);
+    }
+
+    public void setExportPath() {
+        ProjectManager projectManager = Overlap2DFacade.getInstance().retrieveProxy(ProjectManager.NAME);
+        String exportPath = projectManager.getExportPath();
+        exportSettingsInputFileWidget.setValue(new FileHandle(exportPath));
     }
 
     private Table getDimensionsTable() {

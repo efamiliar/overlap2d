@@ -1013,6 +1013,13 @@ public class ProjectManager extends BaseProxy {
         currentProjectVO.projectMainExportPath = path;
     }
 
+    public String getExportPath() {
+        if (currentProjectVO == null || currentProjectVO.projectMainExportPath == null) {
+            return "";
+        }
+        return currentProjectVO.projectMainExportPath;
+    }
+
     public void setTexturePackerSizes(int width, int height) {
         currentProjectVO.texturepackerWidth = String.valueOf(width);
         currentProjectVO.texturepackerHeight = String.valueOf(height);
