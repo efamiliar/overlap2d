@@ -274,6 +274,7 @@ public class ResourceManager extends BaseProxy implements IResourceRetriever {
                 FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
                 parameter.size = Math.round(pair.fontSize * resolutionManager.getCurrentMul());
                 BitmapFont font = generator.generateFont(parameter);
+                font.setUseIntegerPositions(false);
                 bitmapFonts.put(pair, font);
             } catch (IOException e) {
                 e.printStackTrace();
