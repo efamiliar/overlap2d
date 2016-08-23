@@ -379,7 +379,7 @@ public class ResourceManager extends BaseProxy implements IResourceRetriever {
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontManager.getTTFByName(fontfamily));
         BitmapFont font = generator.generateFont(parameter);
-
+        font.setUseIntegerPositions(false);
         addBitmapFont(fontfamily, parameter.size, font);
     }
 
