@@ -20,7 +20,8 @@ package com.uwsoft.editor.view.ui.dialog;
 
 import java.util.Map;
 
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.VisUI;
@@ -33,6 +34,8 @@ import com.uwsoft.editor.Overlap2DFacade;
 import com.commons.UIDraggablePanel;
 import com.uwsoft.editor.renderer.utils.CustomVariables;
 import com.uwsoft.editor.utils.StandardWidgetsFactory;
+
+import javax.swing.*;
 
 /**
  * Created by azakhary on 5/12/2015.
@@ -80,8 +83,8 @@ public class CustomVariablesDialog extends UIDraggablePanel {
         valueField = StandardWidgetsFactory.createTextField();
         addButton = new VisTextButton("Add");
 
-        addVariableTable.add(keyField).width(120).padLeft(6);
-        addVariableTable.add(valueField).width(120).padLeft(5);
+        addVariableTable.add(keyField).padLeft(6);
+        addVariableTable.add(valueField).padLeft(5);
         addVariableTable.add(addButton).width(38).padLeft(4).padRight(5);
 
         addVariableTable.row();
@@ -113,13 +116,27 @@ public class CustomVariablesDialog extends UIDraggablePanel {
             keyTbl.setBackground(VisUI.getSkin().getDrawable("layer-bg"));
             VisTable valueTbl = new VisTable();
             valueTbl.setBackground(VisUI.getSkin().getDrawable("layer-bg"));
-            keyTbl.add(new VisLabel(key)).align(Align.left).width(124).padLeft(2);
-            valueTbl.add(new VisLabel(value)).align(Align.left).width(124).padLeft(2);
+            VisLabel keyLabel = new VisLabel(key);
+            keyLabel.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    Gdx.app.getClipboard().setContents(key);
+                }
+            });
+            keyTbl.add(keyLabel).align(Align.left).width(124).padLeft(2);
+            VisLabel valueLabel = new VisLabel(value);
+            valueLabel.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    Gdx.app.getClipboard().setContents(value);
+                }
+            });
+            valueTbl.add(valueLabel).align(Align.left).padLeft(2);
 
             VisImageButton trashBtn = new VisImageButton("trash-button");
 
             variablesList.add(keyTbl).height(20).padLeft(6);
-            variablesList.add(valueTbl).height(20).padLeft(1);
+            variablesList.add(valueTbl).height(20).padLeft(1).align(Align.left);
             variablesList.add(trashBtn).padLeft(10);
             variablesList.row().padBottom(2);
 
