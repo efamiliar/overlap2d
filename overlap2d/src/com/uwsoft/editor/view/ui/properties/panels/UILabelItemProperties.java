@@ -90,11 +90,11 @@ public class UILabelItemProperties extends UIItemCollapsibleProperties {
     }
 
     public String getText() {
-        return textArea.getText();
+        return textArea.getText().replace("\\n", "\n");
     }
 
     public void setText(String text) {
-        textArea.setText(text);
+        textArea.setText(text.replace("\n", "\\n"));
     }
 
     public void setAlignList() {
@@ -167,13 +167,13 @@ public class UILabelItemProperties extends UIItemCollapsibleProperties {
         italicCheckBox.addListener(new CheckBoxChangeListener(eventName));
         fontSizeField.addListener(new KeyboardListener(eventName));
         textArea.addListener(new KeyboardListener(eventName));
-        textArea.addListener(textArea.new TextAreaListener() {
-            @Override
-            public boolean keyTyped(InputEvent event, char character) {
-                facade.sendNotification(LABEL_TEXT_CHAR_TYPED, null);
-                return true;//super.keyTyped(event, character);
-            }
-        });
+//        textArea.addListener(textArea.new TextAreaListener() {
+//            @Override
+//            public boolean keyTyped(InputEvent event, char character) {
+//                facade.sendNotification(LABEL_TEXT_CHAR_TYPED, null);
+//                return true;//super.keyTyped(event, character);
+//            }
+//        });
 
     }
 

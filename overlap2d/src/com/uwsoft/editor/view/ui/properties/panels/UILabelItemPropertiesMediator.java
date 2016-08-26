@@ -61,7 +61,7 @@ public class UILabelItemPropertiesMediator extends UIItemPropertiesMediator<Enti
         viewComponent.setFontFamily(labelComponent.fontName);
         viewComponent.setFontSize(labelComponent.fontSize);
         viewComponent.setAlignValue(labelComponent.labelAlign);
-        viewComponent.setText(labelComponent.text.toString());
+        viewComponent.setText(labelComponent.text.toString().replace("\\n", "\n"));
 
         if(prevText == null) this.prevText = viewComponent.getText();
     }
