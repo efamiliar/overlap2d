@@ -200,7 +200,19 @@ public class ProjectManager extends BaseProxy {
         facade.sendNotification(Overlap2DMenuBar.RECENT_LIST_MODIFIED);
 
         File prjFile = new File(prjFilePath);
-        if (prjFile.exists() && !prjFile.isDirectory()) {
+        if (!prjFile.isDirectory()) {
+            if (!prjFile.exists()) {
+
+                ProjectVO projVoEmpty = new ProjectVO();
+                projVoEmpty.projectName = prjFile.getName();
+                projVoEmpty.projectVersion = ProjectVersionMigrator.dataFormatVersion;
+
+                try {
+                    FileUtils.writeStringToFile(prjFile, projVoEmpty.constructJsonString(), "utf-8");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             FileHandle projectFile = Gdx.files.internal(prjFilePath);
             String projectContents = null;
             try {
