@@ -21,6 +21,10 @@ package com.uwsoft.editor.view.menu;
 import java.io.File;
 import java.util.ArrayList;
 
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.utils.SnapshotArray;
 import org.apache.commons.lang3.SystemUtils;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
@@ -200,8 +204,9 @@ public class Overlap2DMenuBar extends CustomMenuBar {
             recentProjectsMenuItem = new MenuItem("Recent Projects...");
             recentProjectsPopupMenu = new PopupMenu();
             recentProjectsMenuItem.setSubMenu(recentProjectsPopupMenu);
-            addItem(recentProjectsMenuItem);
             recentProjectsMenuItems = new Array<>();
+            addItem(recentProjectsMenuItem);
+
             PreferencesManager prefs = PreferencesManager.getInstance();
             prefs.buildRecentHistory();
             reInitRecent(prefs.getRecentHistory());
@@ -243,11 +248,15 @@ public class Overlap2DMenuBar extends CustomMenuBar {
         }
 
         public void reInitRecent(ArrayList<String> paths) {
-            recentProjectsMenuItems.clear();
-            recentProjectsPopupMenu.clear();
+            if (recentProjectsMenuItems != null && recentProjectsMenuItems.size != 0) {
+                recentProjectsMenuItems.clear();
+            }
 
+            if (recentProjectsPopupMenu != null && recentProjectsPopupMenu.hasChildren()) {
+                recentProjectsPopupMenu.remove();
+                recentProjectsPopupMenu.clearChildren();
+            }
             addRecent(paths);
-
             if (paths.size() > 0) {
             	recentProjectsPopupMenu.addSeparator();
             }
@@ -255,6 +264,10 @@ public class Overlap2DMenuBar extends CustomMenuBar {
             MenuItem menuItem = new MenuItem("Clear list", new MenuItemListener(CLEAR_RECENTS, null, FILE_MENU));
             recentProjectsMenuItems.add(menuItem);
             recentProjectsPopupMenu.addItem(menuItem);
+
+            if (fileMenu != null) {
+                fileMenu.remove();
+            }
         }
 
         public void setProjectOpen(boolean open) {
