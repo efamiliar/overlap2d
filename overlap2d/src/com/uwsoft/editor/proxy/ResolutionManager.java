@@ -28,6 +28,7 @@ import java.util.concurrent.Executors;
 
 import javax.imageio.ImageIO;
 
+import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
@@ -37,7 +38,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 import com.badlogic.gdx.tools.texturepacker.TextureUnpacker;
 import com.badlogic.gdx.utils.Array;
-import com.kotcrab.vis.ui.util.dialog.DialogUtils;
 import com.mortennobel.imagescaling.ResampleOp;
 import com.puremvc.patterns.proxy.BaseProxy;
 import com.uwsoft.editor.view.stage.Sandbox;
@@ -170,7 +170,7 @@ public class ResolutionManager extends BaseProxy {
             createResizedAnimations(resolutionEntryVO);
             changePercentBy(5);
             if (resizeWarnings > 0) {
-                DialogUtils.showOKDialog(Sandbox.getInstance().getUIStage(), "Warning", resizeWarnings + " images were not resized for smaller resolutions due to already small size ( < 3px )");
+                Dialogs.showOKDialog(Sandbox.getInstance().getUIStage(), "Warning", resizeWarnings + " images were not resized for smaller resolutions due to already small size ( < 3px )");
             }
             Overlap2DFacade.getInstance().sendNotification(RESOLUTION_LIST_CHANGED);
         });

@@ -18,22 +18,25 @@
 
 package com.uwsoft.editor.event;
 
-import com.kotcrab.vis.ui.widget.NumberSelector;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.uwsoft.editor.Overlap2DFacade;
 
 /**
  * Created by azakhary on 6/12/2015.
  */
-public class NumberSelectorOverlapListener implements NumberSelector.NumberSelectorListener {
+public class NumberSelectorOverlapListener extends ChangeListener {
 
     private final String eventName;
+    private final int number;
 
-    public NumberSelectorOverlapListener(String eventName) {
+    public NumberSelectorOverlapListener(String eventName, int number) {
         this.eventName = eventName;
+        this.number = number;
     }
 
     @Override
-    public void changed(float number) {
+    public void changed(ChangeEvent event, Actor actor) {
         Overlap2DFacade facade = Overlap2DFacade.getInstance();
         facade.sendNotification(eventName, number);
     }

@@ -25,8 +25,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.badlogic.gdx.utils.reflect.ReflectionException;
 import com.commons.MsgAPI;
-import com.commons.color.ColorPickerAdapter;
-import com.commons.color.CustomColorPicker;
+import com.kotcrab.vis.ui.widget.color.ColorPicker;
+import com.kotcrab.vis.ui.widget.color.ColorPickerAdapter;
 import com.puremvc.patterns.observer.Notification;
 import com.uwsoft.editor.Overlap2DFacade;
 import com.uwsoft.editor.controller.commands.AddComponentToItemCommand;
@@ -106,7 +106,7 @@ public class UIBasicItemPropertiesMediator extends UIItemPropertiesMediator<Enti
 
         switch (notification.getName()) {
             case UIBasicItemProperties.TINT_COLOR_BUTTON_CLICKED:
-                CustomColorPicker picker = new CustomColorPicker(new ColorPickerAdapter() {
+                ColorPicker picker = new ColorPicker(new ColorPickerAdapter() {
                     @Override
                     public void finished(Color newColor) {
                         viewComponent.setTintColor(newColor);
@@ -118,6 +118,7 @@ public class UIBasicItemPropertiesMediator extends UIItemPropertiesMediator<Enti
                         viewComponent.setTintColor(newColor);
                         facade.sendNotification(viewComponent.getUpdateEventName());
                     }
+
                 });
 
                 picker.setColor(viewComponent.getTintColor());

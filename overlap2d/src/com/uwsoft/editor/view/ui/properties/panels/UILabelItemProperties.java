@@ -8,6 +8,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.kotcrab.vis.ui.util.Validators;
 import com.kotcrab.vis.ui.widget.*;
+import com.kotcrab.vis.ui.widget.spinner.IntSpinnerModel;
+import com.kotcrab.vis.ui.widget.spinner.Spinner;
 import com.uwsoft.editor.Overlap2DFacade;
 import com.uwsoft.editor.event.*;
 import com.uwsoft.editor.view.ui.properties.UIItemCollapsibleProperties;
@@ -30,7 +32,7 @@ public class UILabelItemProperties extends UIItemCollapsibleProperties {
     private VisSelectBox<String> alignSelectBox;
     private VisCheckBox boldCheckBox;
     private VisCheckBox italicCheckBox;
-    private NumberSelector fontSizeField;
+    private Spinner fontSizeField;
     private VisTextArea textArea;
 
     public UILabelItemProperties() {
@@ -43,7 +45,8 @@ public class UILabelItemProperties extends UIItemCollapsibleProperties {
         alignSelectBox = new VisSelectBox<>();
         boldCheckBox = new VisCheckBox(null);
         italicCheckBox = new VisCheckBox(null);
-        fontSizeField = new NumberSelector("", 12, 0, 100);
+        final IntSpinnerModel intModel = new IntSpinnerModel(12, 0, 100, 1);
+        fontSizeField = new Spinner("", intModel);
 
         fontFamilySelectBox.setMaxListCount(10);
         alignSelectBox.setMaxListCount(10);
@@ -147,11 +150,11 @@ public class UILabelItemProperties extends UIItemCollapsibleProperties {
     }
 
     public int getFontSize() {
-        return (int) fontSizeField.getValue();
+        return ((IntSpinnerModel)fontSizeField.getModel()).getValue();
     }
 
     public void setFontSize(int fontSize) {
-        fontSizeField.setValue(fontSize);
+        ((IntSpinnerModel)fontSizeField.getModel()).setValue(fontSize);
     }
 
     @Override

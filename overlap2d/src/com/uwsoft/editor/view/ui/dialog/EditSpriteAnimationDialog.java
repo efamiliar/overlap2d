@@ -23,12 +23,13 @@ import java.util.Map;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.kotcrab.vis.ui.widget.NumberSelector;
 import com.kotcrab.vis.ui.widget.VisImageButton;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import com.kotcrab.vis.ui.widget.VisTextField;
+import com.kotcrab.vis.ui.widget.spinner.IntSpinnerModel;
+import com.kotcrab.vis.ui.widget.spinner.Spinner;
 import com.uwsoft.editor.Overlap2DFacade;
 import com.commons.UIDraggablePanel;
 import com.uwsoft.editor.renderer.data.FrameRange;
@@ -45,8 +46,8 @@ public class EditSpriteAnimationDialog extends UIDraggablePanel {
     private Overlap2DFacade facade;
 
     private VisTextField nameField;
-    private NumberSelector fromFrameField;
-    private NumberSelector toFrameField;
+    private Spinner fromFrameField;
+    private Spinner toFrameField;
     private VisTextButton addButton;
 
     private VisTable animationsList;
@@ -144,11 +145,11 @@ public class EditSpriteAnimationDialog extends UIDraggablePanel {
     }
 
     public int getFrameFrom() {
-        return (int) fromFrameField.getValue();
+        return ((IntSpinnerModel)fromFrameField.getModel()).getValue();
     }
 
     public int getFrameTo() {
-        return (int) toFrameField.getValue();
+        return ((IntSpinnerModel)toFrameField.getModel()).getValue();
     }
 
 
@@ -157,11 +158,11 @@ public class EditSpriteAnimationDialog extends UIDraggablePanel {
     }
 
     public void setFrameFrom(int from) {
-        fromFrameField.setValue(from);
+        ((IntSpinnerModel)fromFrameField.getModel()).setValue(from);
     }
 
     public void setFrameTo(int to) {
-        toFrameField.setValue(to);
+        ((IntSpinnerModel)toFrameField.getModel()).setValue(to);
     }
 
 }

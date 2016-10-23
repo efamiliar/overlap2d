@@ -23,9 +23,10 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-import com.kotcrab.vis.ui.widget.NumberSelector;
 import com.kotcrab.vis.ui.widget.VisSelectBox;
 import com.kotcrab.vis.ui.widget.VisTextButton;
+import com.kotcrab.vis.ui.widget.spinner.IntSpinnerModel;
+import com.kotcrab.vis.ui.widget.spinner.Spinner;
 import com.uwsoft.editor.event.KeyboardListener;
 import com.uwsoft.editor.event.SelectBoxChangeListener;
 import com.uwsoft.editor.view.ui.properties.UIItemCollapsibleProperties;
@@ -41,7 +42,7 @@ public class UISpriteAnimationItemProperties extends UIItemCollapsibleProperties
     public static final String EDIT_ANIMATIONS_CLICKED = "com.uwsoft.editor.view.ui.properties.panels.UISpriteAnimationItemProperties" + ".EDIT_ANIMATIONS_CLICKED";
 
 
-    private NumberSelector fpsSelector;
+    private Spinner fpsSelector;
     private VisSelectBox<String> animationsSelectBox;
     private VisSelectBox<String> playModesSelectBox;
     private VisTextButton editAnimationsButton;
@@ -51,7 +52,7 @@ public class UISpriteAnimationItemProperties extends UIItemCollapsibleProperties
     public UISpriteAnimationItemProperties() {
         super("Sprite Animation");
 
-        fpsSelector = new NumberSelector("", 0, 0, 120);
+        fpsSelector = new Spinner("", new IntSpinnerModel(0, 0, 120));
         animationsSelectBox = new VisSelectBox<>();
         playModesSelectBox = new VisSelectBox<>();
         editAnimationsButton = new VisTextButton("Edit animations");
@@ -75,11 +76,11 @@ public class UISpriteAnimationItemProperties extends UIItemCollapsibleProperties
     }
 
     public void setFPS(int fps) {
-        fpsSelector.setValue(fps);
+        ((IntSpinnerModel)fpsSelector.getModel()).setValue(fps);
     }
 
     public int getFPS() {
-        return (int) fpsSelector.getValue();
+        return ((IntSpinnerModel)fpsSelector.getModel()).getValue();
     }
 
     public void setPlayModes() {
