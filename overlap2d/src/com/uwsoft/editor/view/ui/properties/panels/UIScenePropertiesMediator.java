@@ -70,6 +70,9 @@ public class UIScenePropertiesMediator extends UIAbstractPropertiesMediator<Scen
                     }
                 });
 
+                if (notification.getBody() != null) {
+                    viewComponent.setAmbientColor(notification.getBody());
+                }
                 picker.setColor(viewComponent.getAmbientColor());
                 Sandbox.getInstance().getUIStage().addActor(picker.fadeIn());
 

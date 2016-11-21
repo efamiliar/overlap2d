@@ -170,7 +170,7 @@ public class UISceneProperties extends UIAbstractProperties {
         ambientColorComponent.addListener(new ClickListener() {
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchUp(event, x, y, pointer, button);
-                facade.sendNotification(AMBIENT_COLOR_BUTTON_CLICKED);
+                facade.sendNotification(AMBIENT_COLOR_BUTTON_CLICKED, ambientColorComponent.getColorValue(), null);
             }
         });
     }
