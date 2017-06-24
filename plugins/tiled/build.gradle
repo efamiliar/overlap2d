@@ -59,11 +59,7 @@ project(":overlap2d-common-api") {
 }
 
 repositories {
-    mavenLocal()
-    mavenCentral()
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-    maven { url "https://oss.sonatype.org/content/repositories/releases/" }
-    maven { url "http://repo.serkprojects.com/content/groups/public/" }
+    jcenter()
 }
 
 task wrapper(type: Wrapper) {
