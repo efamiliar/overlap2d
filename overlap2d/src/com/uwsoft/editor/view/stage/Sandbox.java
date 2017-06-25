@@ -407,6 +407,10 @@ public class Sandbox {
         facade.sendNotification(MsgAPI.GRID_SIZE_CHANGED, gridSize);
     }
 
+    public void setLockLines(boolean lockLines) {
+        facade.sendNotification(MsgAPI.LOCK_LINES_CHANGED, lockLines);
+    }
+
     
     public Entity getRootEntity(){
     	return sceneControl.getRootEntity();

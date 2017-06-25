@@ -19,11 +19,14 @@
 package com.uwsoft.editor.view.ui.box;
 
 
+import com.badlogic.gdx.Gdx;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.util.Validators;
+import com.kotcrab.vis.ui.widget.VisCheckBox;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTextField;
 import com.kotcrab.vis.ui.widget.VisValidatableTextField;
+import com.uwsoft.editor.event.CheckBoxChangeListener;
 import com.uwsoft.editor.event.KeyboardListener;
 
 /**
@@ -31,9 +34,12 @@ import com.uwsoft.editor.event.KeyboardListener;
  */
 public class UIGridBox extends UIBaseBox {
 
+    private static final String TAG = "UIGridBox";
     private static final String GRID_BOX_PREFIX = "com.uwsoft.editor.view.ui.box.UIGridBox";
     public static final String GRID_SIZE_TEXT_FIELD_UPDATED = GRID_BOX_PREFIX + ".GRID_SIZE_TEXT_FIELD_UPDATED";
+    public static final String LOCK_LINES_CHECKBOX_FIELD_UPDATED = GRID_BOX_PREFIX + ".LOCK_LINES_CHECKBOX_FIELD_UPDATED";
     private VisValidatableTextField gridSizeTextField;
+    private VisCheckBox lockLinesCheckBox;
 
     public UIGridBox() {
         super();
@@ -47,6 +53,10 @@ public class UIGridBox extends UIBaseBox {
     }
 
     private void init() {
+        lockLinesCheckBox = new VisCheckBox("Lock lines");
+        lockLinesCheckBox.addListener(new CheckBoxChangeListener(LOCK_LINES_CHECKBOX_FIELD_UPDATED));
+        add(lockLinesCheckBox).width(100).padRight(4);
+
         VisLabel lbl = new VisLabel("Grid Size:");
         add(lbl).padRight(4);
         gridSizeTextField = new VisValidatableTextField(new Validators.IntegerValidator());
@@ -58,6 +68,14 @@ public class UIGridBox extends UIBaseBox {
 
     public void setGridSize(int gridSize) {
         gridSizeTextField.setText(gridSize + "");
+    }
+
+    public void setLockLines(boolean lockLines) {
+        if (lockLines) {
+            Gdx.app.log(TAG, "Lines locked");
+        } else {
+            Gdx.app.log(TAG, "Lines unlocked");
+        }
     }
 
     public void hide() {

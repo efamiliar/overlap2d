@@ -1,5 +1,6 @@
 package com.uwsoft.editor.view.ui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.commons.MsgAPI;
 import com.puremvc.patterns.mediator.SimpleMediator;
@@ -34,7 +35,8 @@ public class RulersUIMediator extends SimpleMediator<RulersUI> {
     public String[] listNotificationInterests() {
         return new String[]{
                 MsgAPI.SCENE_LOADED,
-                RulersUI.ACTION_GUIDES_MODIFIED
+                RulersUI.ACTION_GUIDES_MODIFIED,
+                MsgAPI.LOCK_LINES_CHANGED
         };
     }
 
@@ -75,6 +77,14 @@ public class RulersUIMediator extends SimpleMediator<RulersUI> {
                     }
                 }
 
+                break;
+            case MsgAPI.LOCK_LINES_CHANGED:
+                Boolean lockLines = notification.getBody();
+                if (lockLines != null) {
+                    viewComponent.setLockLines(lockLines);
+                } else {
+                    Gdx.app.log(TAG, "Notification body for MsgAPI.LOCK_LINES_CHANGED is null");
+                }
                 break;
         }
     }

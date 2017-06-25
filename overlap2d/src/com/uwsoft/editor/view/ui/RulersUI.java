@@ -65,6 +65,7 @@ public class RulersUI extends Actor {
     private VisLabel guidePosLbl;
 
     private Guide draggingGuide = null;
+    private boolean lockLines;
 
     public RulersUI() {
         shapeRenderer = new ShapeRenderer();
@@ -118,6 +119,8 @@ public class RulersUI extends Actor {
             @Override
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 super.touchDragged(event, x, y, pointer);
+
+                if (lockLines) return;
 
                 Vector2 downPost = new Vector2(getTouchDownX(), getTouchDownY());
                 if (isTouchingDownRuler && draggingGuide == null && downPost.dst(x, y) > 3) {
@@ -453,5 +456,9 @@ public class RulersUI extends Actor {
 
     public void setGuides(Array<Guide> guides) {
         this.guides = guides;
+    }
+
+    public void setLockLines(boolean lockLines) {
+        this.lockLines = lockLines;
     }
 }

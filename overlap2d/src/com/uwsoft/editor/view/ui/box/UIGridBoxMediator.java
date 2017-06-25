@@ -40,7 +40,9 @@ public class UIGridBoxMediator extends SimpleMediator<UIGridBox> {
         return new String[]{
                 ProjectManager.PROJECT_OPENED,
                 MsgAPI.GRID_SIZE_CHANGED,
+                MsgAPI.LOCK_LINES_CHANGED,
                 UIGridBox.GRID_SIZE_TEXT_FIELD_UPDATED,
+                UIGridBox.LOCK_LINES_CHECKBOX_FIELD_UPDATED,
                 MsgAPI.SHOW_GRID,
                 MsgAPI.HIDE_GRID
         };
@@ -59,9 +61,17 @@ public class UIGridBoxMediator extends SimpleMediator<UIGridBox> {
             case MsgAPI.GRID_SIZE_CHANGED:
                 viewComponent.setGridSize(sandbox.getGridSize());
                 break;
+            case MsgAPI.LOCK_LINES_CHANGED:
+                Boolean lockLinesChanged = notification.getBody();
+                viewComponent.setLockLines(lockLinesChanged);
+                break;
             case UIGridBox.GRID_SIZE_TEXT_FIELD_UPDATED:
                 String body = notification.getBody();
                 sandbox.setGridSize(Integer.parseInt(body));
+                break;
+            case UIGridBox.LOCK_LINES_CHECKBOX_FIELD_UPDATED:
+                Boolean lockLines = notification.getBody();
+                sandbox.setLockLines(lockLines);
                 break;
             case MsgAPI.SHOW_GRID:
                 viewComponent.show();
