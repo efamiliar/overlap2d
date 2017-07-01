@@ -1,3 +1,5 @@
+# Ignore config.pit for last opened system path
+config.pit 
 
 # Created by https://www.gitignore.io/api/intellij+iml,java,gwt,android,eclipse,netbeans,gradle,macos
 
