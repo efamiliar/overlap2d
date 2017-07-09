@@ -18,6 +18,7 @@
 
 package com.uwsoft.editor.view.ui.widget;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
@@ -33,6 +34,8 @@ import com.kotcrab.vis.ui.widget.file.FileChooserListener;
  * Created by sargis on 4/3/15.
  */
 public class InputFileWidget extends VisTable {
+    private static final String TAG = "InputFileWidget";
+
     private VisTextField textField;
     private VisTextButton browsBtn;
     private Cell<VisTextField> textFieldCell;
@@ -121,7 +124,15 @@ public class InputFileWidget extends VisTable {
 
         @Override
         public void selected(Array<FileHandle> files) {
-            setValues(files);
+            if (files == null || files.size == 0) {
+                Gdx.app.log(TAG, "Error: files array null or empty.");
+                return;
+            }
+            if (files.size == 1) {
+                setValue(files.first());
+            } else {
+                setValues(files);
+            }
         }
 
         @Override
