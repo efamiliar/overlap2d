@@ -88,12 +88,14 @@ public class InputFileWidget extends VisTable {
 
     private void setValues(Array<FileHandle> values) {
         this.values = values;
-        String path = "";
+        StringBuilder path = new StringBuilder();
         for (FileHandle handle : values) {
-            path += handle.name() + ",";
+            path.append(handle.path()).append(",");
         }
-        path = path.substring(0, path.length() - 1);
-        textField.setText(path);
+
+        // Remove comma in the last character.
+        path.deleteCharAt(path.length() - 1);
+        textField.setText(path.toString());
     }
 
 
