@@ -2,7 +2,6 @@ package com.uwsoft.editor.controller.commands.resource;
 
 import com.badlogic.ashley.core.Entity;
 import com.uwsoft.editor.controller.commands.NonRevertibleCommand;
-import com.uwsoft.editor.proxy.ResolutionManager;
 import com.uwsoft.editor.renderer.components.TextureRegionComponent;
 import com.uwsoft.editor.renderer.data.CompositeItemVO;
 import com.uwsoft.editor.renderer.data.SceneVO;
@@ -31,8 +30,8 @@ public class DeleteImageResource extends NonRevertibleCommand {
         if (projectManager.deleteSingleImage(imageName)) {
             deleteEntitiesWithImages(sandbox.getRootEntity(), imageName);
             deleteAllItemsImages(imageName);
-            ResolutionManager resolutionManager = facade.retrieveProxy(ResolutionManager.NAME);
-            resolutionManager.rePackProjectImagesForAllResolutions();
+//            ResolutionManager resolutionManager = facade.retrieveProxy(ResolutionManager.NAME);
+//            resolutionManager.rePackProjectImagesForAllResolutions();
             projectManager.loadProjectData(projectManager.getCurrentProjectPath());
             sendNotification(DONE, imageName);
             SceneVO vo = sandbox.sceneVoFromItems();
